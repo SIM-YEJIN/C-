@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class Date {
+	int year;
+	int month;
+	int day;
+	int month_day[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+public:
+	void set_date(int _year, int _month, int _day){
+		year = _year;
+		month = _month;
+		day = _day;
+	}
+	void add_day(int inc) {
+		if (day + inc > month_day[month - 1]) {
+			day += inc;
+			day -= month_day[month - 1];
+			add_month(1);
+		}
+		else {
+			day += inc;
+		}
+	}
+	void add_month(int inc) {
+		if (month + inc > 12) {
+			month += inc;
+			month -= 12;
+			add_year(1);
+		}
+		else {
+			month += inc;
+		}
+	}
+	void add_year(int inc) {
+		year += inc;
+	}
+	void get_date() {
+		cout << year << "년 " << month << "월 " << day << "일" << endl;
+	}
+};
+
+int main() {
+	Date date;
+	date.set_date(2019, 3, 22);
+	date.add_day(45);
+	date.add_month(3);
+	date.add_year(2);
+	
+	date.get_date();
+	return 0;
+}
