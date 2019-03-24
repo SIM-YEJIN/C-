@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+class Date {
+	int year;
+	int month;
+	int day;
+
+public:
+	void set_date(int _year, int _month, int _day);
+	void add_day(int inc);
+	void add_month(int inc);
+	void add_year(int inc);
+	void show_date();
+
+	Date() {
+		cout << "기본 생성자 호출!" << endl;
+		year = 2019;
+		month = 3;
+		day = 23;
+	}
+
+	Date(int _year, int _month, int _day) {
+		cout << "3인자 개인 생성자 호출!" << endl;
+		year = _year;
+		month = _month;
+		day = _day;
+	}
+};
+
+void Date::show_date() {
+	cout << "오늘은 " << year << " 년 " << month << " 월 " << day << " 일입니다." << endl;
+}
+
+int main20() {
+	Date day = Date();
+	Date day2(2019, 3, 31);
+
+	day.show_date();
+	day2.show_date();
+	return 0;
+}
