@@ -1,0 +1,72 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <string.h>
+#include <iostream>
+using namespace std;
+
+class Photon_Canon {
+	int hp, shield;
+	int coord_x, coord_y;
+	int damage;
+
+	char *name;
+
+public:
+	Photon_Canon(int x, int y);
+	Photon_Canon(const Photon_Canon& pc);
+	Photon_Canon(int x, int y, const char *canon_name);
+	~Photon_Canon();
+
+	void show_status();
+};
+
+Photon_Canon::Photon_Canon(const Photon_Canon& pc) {
+	cout << "복사 생성자 호출!" << endl;
+	hp = pc.hp;
+	shield = pc.shield;
+	coord_x = pc.coord_x;
+	coord_y = pc.coord_y;
+	damage = pc.damage;
+
+	name = new char[strlen(pc.name) + 1];
+	strcpy(name, pc.name);
+}
+
+Photon_Canon::Photon_Canon(int x, int y) {
+	cout << "생성자 호출!" << endl;
+	hp = shield = 100;
+	coord_x = x;
+	coord_y = y;
+	damage = 20;
+	name = NULL;
+}
+
+Photon_Canon::Photon_Canon(int x, int y, const char *canon_name) {
+	hp = shield = 100;
+	coord_x = x;
+	coord_y = y;
+	damage = 20;
+	name = new char[strlen(canon_name) + 1];
+	strcpy(name, canon_name);
+}
+
+Photon_Canon::~Photon_Canon() {
+	if (name) delete[] name;
+}
+
+void Photon_Canon::show_status() {
+	cout << "Photon Canon " << name << endl;
+	cout << " Location : ( " << coord_x << " , " << coord_y << " ) " << endl;
+	cout << " HP: " << hp << endl;
+}
+
+int main23() {
+	Photon_Canon pc1(3, 3, "Canon");
+	Photon_Canon pc2 = pc1;
+	//Photon_Canon pc3 = pc2;
+
+	pc1.show_status();
+	pc2.show_status();
+
+	return 0;
+}
